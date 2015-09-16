@@ -1,0 +1,23 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "yari.mattei@gmail.com",
+    "longName": "YWatchFace",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "YWatchFace",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "03ecc90b-8278-4ae6-9d66-1bb4d4fa854c",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
