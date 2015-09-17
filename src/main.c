@@ -2,6 +2,7 @@
 
 static Window *s_main_window;
 static TextLayer *s_time_layer;
+static TextLayer *s_name_layer;
 
 static void update_time() {
   // Get a tm structure
@@ -27,6 +28,12 @@ static void update_time() {
 
 static void main_window_load(Window *window) {
   // Create time TextLayer
+  s_name_layer = text_layer_create(GRect(0, 0, 144, 50));
+  text_layer_set_background_color(s_name_layer, GColorClear);
+  text_layer_set_text_color(s_name_layer, GColorBlack);
+  text_layer_set_text(s_name_layer, "YaroX");
+  
+  // Create time TextLayer
   s_time_layer = text_layer_create(GRect(0, 55, 144, 50));
   text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorBlack);
@@ -37,6 +44,7 @@ static void main_window_load(Window *window) {
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_name_layer));
 }
 
 static void main_window_unload(Window *window) {
