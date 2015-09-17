@@ -3,6 +3,7 @@
 
 static Window *s_main_window;
 static TextLayer *s_time_layer;
+static TextLayer *s_date_layer;
 static TextLayer *s_name_layer;
 
 static void update_time() {
@@ -29,16 +30,25 @@ static void update_time() {
   // Display this time on the TextLayer
   text_layer_set_text(s_time_layer, bufferTime);
   // Display this date on the TextLayer
-  text_layer_set_text(s_name_layer, bufferDate);
+  text_layer_set_text(s_date_layer, bufferDate);
 }
 
 
 static void main_window_load(Window *window) {
+  // Create date TextLayer
+  s_date_layer = text_layer_create(GRect(0, 118, 144, 50));
+  text_layer_set_background_color(s_date_layer, GColorWhite);
+  text_layer_set_text_color(s_date_layer, GColorBlack);
+  
+  // Improve the date TextLayer layout to be more like a watchface
+  text_layer_set_font(s_date_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
+  text_layer_set_text_alignment(s_date_layer, GTextAlignmentCenter);
+  
   // Create name TextLayer
   s_name_layer = text_layer_create(GRect(0, 0, 144, 50));
   text_layer_set_background_color(s_name_layer, GColorWhite);
   text_layer_set_text_color(s_name_layer, GColorBlack);
-  //text_layer_set_text(s_name_layer, "YaroX");
+  text_layer_set_text(s_name_layer, "YaroX");
   
   // Improve the name TextLayer layout to be more like a watchface
   text_layer_set_font(s_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
@@ -56,12 +66,14 @@ static void main_window_load(Window *window) {
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_name_layer));
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_date_layer));
 }
 
 static void main_window_unload(Window *window) {
     // Destroy TextLayer
     text_layer_destroy(s_time_layer);
     text_layer_destroy(s_name_layer);
+    text_layer_destroy(s_date_layer);
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
