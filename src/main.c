@@ -27,18 +27,22 @@ static void update_time() {
 
 
 static void main_window_load(Window *window) {
-  // Create time TextLayer
+  // Create name TextLayer
   s_name_layer = text_layer_create(GRect(0, 0, 144, 50));
   text_layer_set_background_color(s_name_layer, GColorClear);
   text_layer_set_text_color(s_name_layer, GColorBlack);
   text_layer_set_text(s_name_layer, "YaroX");
+  
+  // Improve the name TextLayer layout to be more like a watchface
+  text_layer_set_font(s_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
+  text_layer_set_text_alignment(s_name_layer, GTextAlignmentCenter);
   
   // Create time TextLayer
   s_time_layer = text_layer_create(GRect(0, 55, 144, 50));
   text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorBlack);
 
-  // Improve the layout to be more like a watchface
+  // Improve the time TextLayer layout to be more like a watchface
   text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
 
