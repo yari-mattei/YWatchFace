@@ -1,6 +1,6 @@
 #include <pebble.h>
   
-
+//screen resolution 144*168
 static Window *s_main_window;
 static TextLayer *s_time_layer;
 static TextLayer *s_date_layer;
@@ -36,7 +36,7 @@ static void update_time() {
 
 static void drawline_callback(Layer *layer, GContext *ctx) {
   GPoint p0 = GPoint(0, 35);
-  GPoint p1 = GPoint(70, 85);
+  GPoint p1 = GPoint(72, 85);
   graphics_context_set_stroke_color(ctx, GColorBlack);
   graphics_context_set_stroke_width(ctx, 4);
   graphics_draw_line(ctx, p0, p1);
