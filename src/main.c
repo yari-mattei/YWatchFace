@@ -35,8 +35,8 @@ static void update_time() {
 }
 
 static void drawline_callback(Layer *layer, GContext *ctx) {
-  GPoint p0 = GPoint(0, 30);
-  GPoint p1 = GPoint(70, 80);
+  GPoint p0 = GPoint(0, 35);
+  GPoint p1 = GPoint(70, 85);
   graphics_context_set_stroke_color(ctx, GColorBlack);
   graphics_context_set_stroke_width(ctx, 4);
   graphics_draw_line(ctx, p0, p1);
