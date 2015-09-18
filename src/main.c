@@ -38,6 +38,7 @@ static void drawline_callback(Layer *layer, GContext *ctx) {
   GPoint p0 = GPoint(0, 0);
   GPoint p1 = GPoint(100, 100);
   graphics_context_set_stroke_color(ctx, GColorBlack);
+  graphics_context_set_stroke_width(ctx, 4);
   graphics_draw_line(ctx, p0, p1);
 }
 
@@ -53,7 +54,7 @@ static void main_window_load(Window *window) {
   text_layer_set_text_alignment(s_date_layer, GTextAlignmentCenter);
   
   // Create name TextLayer
-  s_name_layer = text_layer_create(GRect(0, 0, 144, 50));
+  s_name_layer = text_layer_create(GRect(0, 55, 144, 50));
   text_layer_set_background_color(s_name_layer, GColorWhite);
   text_layer_set_text_color(s_name_layer, GColorBlack);
   text_layer_set_text(s_name_layer, "YaroX");
@@ -63,7 +64,7 @@ static void main_window_load(Window *window) {
   text_layer_set_text_alignment(s_name_layer, GTextAlignmentCenter);
   
   // Create time TextLayer
-  s_time_layer = text_layer_create(GRect(0, 55, 144, 50));
+  s_time_layer = text_layer_create(GRect(0, 0, 144, 50));
   text_layer_set_background_color(s_time_layer, GColorWhite);
   text_layer_set_text_color(s_time_layer, GColorBlack);
 
