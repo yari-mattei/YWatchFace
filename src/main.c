@@ -5,7 +5,8 @@ static Window *s_main_window;
 static TextLayer *s_time_layer;
 static TextLayer *s_date_layer;
 static TextLayer *s_name_layer;
-static Layer *s_line;
+static Layer *s_line_left;
+static Layer *s_line_right;
 
 static void update_time() {
   // Get a tm structure
@@ -34,8 +35,16 @@ static void update_time() {
   text_layer_set_text(s_date_layer, bufferDate);
 }
 
-static void drawline_callback(Layer *layer, GContext *ctx) {
+static void drawline_left_callback(Layer *layer, GContext *ctx) {
   GPoint p0 = GPoint(0, 35);
+  GPoint p1 = GPoint(72, 85);
+  graphics_context_set_stroke_color(ctx, GColorBlack);
+  graphics_context_set_stroke_width(ctx, 4);
+  graphics_draw_line(ctx, p0, p1);
+}
+
+static void drawline_right_callback(Layer *layer, GContext *ctx) {
+  GPoint p0 = GPoint(168, 18);
   GPoint p1 = GPoint(72, 85);
   graphics_context_set_stroke_color(ctx, GColorBlack);
   graphics_context_set_stroke_width(ctx, 4);
@@ -72,15 +81,20 @@ static void main_window_load(Window *window) {
   text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
   
-  // Create a Layer and set the update_proc
-  s_line = layer_create(GRect(0, 0, 144, 168));
-  layer_set_update_proc(s_line, drawline_callback);
+  // Create left line Layer 
+  s_line_left = layer_create(GRect(0, 0, 144, 168));
+  layer_set_update_proc(s_line_left, drawline_left_callback);
+  
+  // Create right line layer
+  s_line_right = layer_create(GRect(0, 0, 144, 168));
+  layer_set_update_proc(s_line_right, drawline_right_callback);
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_name_layer));
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_date_layer));
-  layer_add_child(window_get_root_layer(window), s_line);
+  layer_add_child(window_get_root_layer(window), s_line_left);
+  layer_add_child(window_get_root_layer(window), s_line_right);
 }
 
 static void main_window_unload(Window *window) {
@@ -88,7 +102,8 @@ static void main_window_unload(Window *window) {
     text_layer_destroy(s_time_layer);
     text_layer_destroy(s_name_layer);
     text_layer_destroy(s_date_layer);
-    layer_destroy(s_line);
+    layer_destroy(s_line_left);
+    layer_destroy(s_line_right);
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
