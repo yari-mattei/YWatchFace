@@ -7,8 +7,8 @@ static Window *s_main_window;
 static TextLayer *s_time_layer;
 static TextLayer *s_date_layer;
 static TextLayer *s_name_layer;
-static Layer *s_line_left;
-static Layer *s_line_right;
+//static Layer *s_line_left;
+//static Layer *s_line_right;
 
 static void update_time() {
   // Get a tm structure
@@ -84,22 +84,22 @@ static void main_window_load(Window *window) {
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
   
   // Create left line Layer 
-  s_line_left = layer_create(GRect(0, 0, 144, 168));
-  layer_set_update_proc(s_line_left, drawline_left_callback);
+  //s_line_left = layer_create(GRect(0, 0, 144, 168));
+  //layer_set_update_proc(s_line_left, drawline_left_callback);
   
   // Create right line layer
-  s_line_right = layer_create(GRect(0, 0, 144, 168));
-  layer_set_update_proc(s_line_right, drawline_right_callback);
+  //s_line_right = layer_create(GRect(0, 0, 144, 168));
+  //layer_set_update_proc(s_line_right, drawline_right_callback);
   
   // Create Y lines
-  initialize();
+  initializeYLines();
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_name_layer));
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_date_layer));
-  layer_add_child(window_get_root_layer(window), s_line_left);
-  layer_add_child(window_get_root_layer(window), s_line_right);
+  //layer_add_child(window_get_root_layer(window), s_line_left);
+  //layer_add_child(window_get_root_layer(window), s_line_right);
   layer_add_child(window_get_root_layer(window), getYLines());
 }
 
@@ -108,9 +108,10 @@ static void main_window_unload(Window *window) {
     text_layer_destroy(s_time_layer);
     text_layer_destroy(s_name_layer);
     text_layer_destroy(s_date_layer);
-    layer_destroy(s_line_left);
-    layer_destroy(s_line_right);
-    layer_destroy(getYLines());
+    //layer_destroy(s_line_left);
+    //layer_destroy(s_line_right);
+    //layer_destroy(getYLines());
+    destroyYLines();
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
