@@ -1,5 +1,7 @@
 #include <pebble.h>
   
+#include "YLines.h"
+  
 //screen resolution 144*168
 static Window *s_main_window;
 static TextLayer *s_time_layer;
@@ -88,6 +90,9 @@ static void main_window_load(Window *window) {
   // Create right line layer
   s_line_right = layer_create(GRect(0, 0, 144, 168));
   layer_set_update_proc(s_line_right, drawline_right_callback);
+  
+  // Create Y lines
+  initialize();
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
@@ -95,6 +100,7 @@ static void main_window_load(Window *window) {
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_date_layer));
   layer_add_child(window_get_root_layer(window), s_line_left);
   layer_add_child(window_get_root_layer(window), s_line_right);
+  layer_add_child(window_get_root_layer(window), getYLines());
 }
 
 static void main_window_unload(Window *window) {
@@ -104,6 +110,7 @@ static void main_window_unload(Window *window) {
     text_layer_destroy(s_date_layer);
     layer_destroy(s_line_left);
     layer_destroy(s_line_right);
+    layer_destroy(getYLines());
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
