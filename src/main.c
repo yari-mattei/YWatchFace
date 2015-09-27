@@ -6,7 +6,6 @@
 //screen resolution 144*168
 static Window *s_main_window;
 static TextLayer *s_time_layer;
-//static TextLayer *s_date_layer;
 static TextLayer *s_name_layer;
 
 static void update_time() {
@@ -19,7 +18,6 @@ static void update_time() {
 
   // Create a long-lived buffer
   static char bufferTime[] = "00:00";
-  static char bufferDate[] = "dd/mm/yyyy";
 
   // Write the current hours and minutes into the buffer
   if(clock_is_24h_style() == true) {
@@ -30,25 +28,11 @@ static void update_time() {
     strftime(bufferTime, sizeof("00:00"), "%I:%M", tick_time);
   }
   
-  // Write the current date into the buffer
-  strftime(bufferDate, sizeof("dd/mm/yyyy"), "%d/%m/%Y", tick_time);
-  
   // Display this time on the TextLayer
   text_layer_set_text(s_time_layer, bufferTime);
-  // Display this date on the TextLayer
-  //text_layer_set_text(s_date_layer, bufferDate);
 }
 
 static void main_window_load(Window *window) {
-  // Create date TextLayer
- /* s_date_layer = text_layer_create(GRect(0, 118, 144, 50));
-  text_layer_set_background_color(s_date_layer, GColorWhite);
-  text_layer_set_text_color(s_date_layer, GColorBlack);
-  
-  // Improve the date TextLayer layout to be more like a watchface
-  text_layer_set_font(s_date_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
-  text_layer_set_text_alignment(s_date_layer, GTextAlignmentCenter);*/
-  
   // Create name TextLayer
   s_name_layer = text_layer_create(GRect(0, 34, 144, 30));
   text_layer_set_background_color(s_name_layer, GColorClear);
@@ -77,16 +61,14 @@ static void main_window_load(Window *window) {
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_name_layer));
-  //layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_date_layer));
   layer_add_child(window_get_root_layer(window), getYDate());
   layer_add_child(window_get_root_layer(window), getYLines());
 }
 
 static void main_window_unload(Window *window) {
-    // Destroy TextLayer
+    // Destroy Layers
     text_layer_destroy(s_time_layer);
     text_layer_destroy(s_name_layer);
-    //text_layer_destroy(s_date_layer);
     destroyYLines();
     destroyYDate();
 }
