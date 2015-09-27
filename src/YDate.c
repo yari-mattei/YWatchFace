@@ -3,7 +3,7 @@
 
 void initializeYDate(){
   // Create day TextLayer
-  s_day_layer = text_layer_create(GRect(0, 60, 30, 30));
+  s_day_layer = text_layer_create(GRect(4, 60, 30, 30));
   text_layer_set_background_color(s_day_layer, GColorWhite);
   text_layer_set_text_color(s_day_layer, GColorBlack);
   
@@ -11,25 +11,25 @@ void initializeYDate(){
   
   // Improve the day TextLayer layout
   text_layer_set_font(s_day_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
-  text_layer_set_text_alignment(s_day_layer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(s_day_layer, GTextAlignmentLeft);
   
   // Create month TextLayer
-  s_month_layer = text_layer_create(GRect(0, 90, 30, 30));
+  s_month_layer = text_layer_create(GRect(4, 90, 30, 30));
   text_layer_set_background_color(s_month_layer, GColorWhite);
   text_layer_set_text_color(s_month_layer, GColorBlack);
   
   // Improve the month TextLayer layout
   text_layer_set_font(s_month_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
-  text_layer_set_text_alignment(s_month_layer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(s_month_layer, GTextAlignmentLeft);
   
   // Create year TextLayer
-  s_year_layer = text_layer_create(GRect(0, 120, 70, 30));
+  s_year_layer = text_layer_create(GRect(4, 120, 60, 30));
   text_layer_set_background_color(s_year_layer, GColorWhite);
   text_layer_set_text_color(s_year_layer, GColorBlack);
   
   // Improve the year TextLayer layout
   text_layer_set_font(s_year_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
-  text_layer_set_text_alignment(s_year_layer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(s_year_layer, GTextAlignmentLeft);
   
   // Create Date Layer
   s_date_layer = layer_create(GRect(0, 0, 144, 168));
