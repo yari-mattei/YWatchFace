@@ -2,6 +2,7 @@
   
 #include "YLines.h"
 #include "YDate.h"
+#include "YBattery.h"
   
 //screen resolution 144*168
 static Window *s_main_window;
@@ -57,12 +58,16 @@ static void main_window_load(Window *window) {
   
   // Create Y Date
   initializeYDate();
+  
+  // create Y battery
+  initializeYBattery();
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_name_layer));
   layer_add_child(window_get_root_layer(window), getYDate());
   layer_add_child(window_get_root_layer(window), getYLines());
+  layer_add_child(window_get_root_layer(window), getYBattery());
 }
 
 static void main_window_unload(Window *window) {
@@ -71,6 +76,7 @@ static void main_window_unload(Window *window) {
     text_layer_destroy(s_name_layer);
     destroyYLines();
     destroyYDate();
+    destroyYBattery();
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
